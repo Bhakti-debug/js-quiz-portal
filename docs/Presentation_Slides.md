@@ -39,6 +39,8 @@
 ---
 
 ## Slide 4: Phase-II (FA-2) Advanced Features
+- **User Authentication & Role-Based Access (RBAC):** Login (`/login`) and Register (`/register`) views with pre-seeded one-click demo credentials for Student and Admin evaluation.
+- **Route Guards (`ProtectedRoute.jsx`):** Protects active test execution and restricts Admin Portal to authorized faculty roles.
 - **Client-Side Routing:** Decoupled Dashboard, Quiz taking page, and Admin workbenches.
 - **Shared Context:** Global `QuizProvider` managing core stats, available databases, and attempt history.
 - **Custom Timer Hook:** Manages countdowns, pausing, and handles automated time-out submissions.
@@ -92,8 +94,10 @@
 
 ---
 
-## Slide 10: Conclusion & Q&A
-- **Achievements:** Developed a complete, responsive, full-stack capability quiz assessment portal.
+## Slide 10: Conclusion & Project Links
+- **Achievements:** Developed a complete, responsive, full-stack capability quiz assessment portal with RBAC authentication.
+- **GitHub Repository:** `[GITHUB_REPO_URL]`
+- **Live Deployed App:** `[DEPLOYED_APP_URL]`
 - **Future Roadmap:** Monaco Code Editor integration, multiplayer rooms via WebSockets.
 - **Evaluator Feedback:** Prepared for Viva queries.
 - **Open for Questions.**

@@ -8,7 +8,11 @@
 ---
 
 ## Executive Summary
-The **JavaScript Quiz and Assessment Portal** is a production-ready, client-oriented single-page application (SPA) designed to test developers on core JavaScript (ES6+), async patterns, and React.js programming principles. Building on the core structures initialized in Phase-I (FA-1), Phase-II integrates advanced React hooks, client-side routing, modular form structures with interactive field validations, state contexts, and mock API data services. The resulting application provides an automated gamified assessment flow (XP systems and Level indicators) coupled with an administrative backend for database modifications (Create, Read, Update, Delete operations).
+The **JavaScript Quiz and Assessment Portal** is a production-ready, client-oriented single-page application (SPA) designed to test developers on core JavaScript (ES6+), async patterns, and React.js programming principles. Building on the core structures initialized in Phase-I (FA-1), Phase-II integrates user authentication with Role-Based Access Control (RBAC), protected routing, advanced React hooks, client-side routing, modular form structures with interactive field validations, state contexts, and mock API data services. The resulting application provides an automated gamified assessment flow (XP systems and Level indicators) coupled with an administrative backend for database modifications (Create, Read, Update, Delete operations).
+
+### Project Links
+- **GitHub Repository:** `[GITHUB_REPO_URL]`
+- **Live Deployed Application:** `[DEPLOYED_APP_URL]`
 
 ---
 
@@ -18,9 +22,11 @@ In modern academic and professional settings, evaluating coding knowledge extend
 
 ### 1.2 System Scope
 The application covers:
+- User Authentication (Login, Register, Logout) with Role-Based Access Control (Student vs Admin).
+- Protected Routes safeguarding assessment sessions and administrative panels.
 - Dynamic test execution with automated timers.
 - Search indexes and metadata classification (category, difficulty, question volume, time-limit).
-- Leaderboard tracker and user profile manager.
+- Leaderboard tracker, XP points system, and per-user attempt history.
 - Administrative CRUD portal to update, add, or delete quiz questions and quizzes.
 - Standalone execution capabilities powered by local storage API simulation.
 
@@ -103,7 +109,7 @@ Capsulates the timing mechanism using React `useEffect` hooks and reference wrap
 ### 4.4 Local API Mocking Layer (`api.js`)
 Simulates server-side latency using async/await promises:
 ```javascript
-const delay = (ms = 300) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms = 250) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const api = {
   getQuizzes: async () => {
@@ -114,6 +120,21 @@ export const api = {
 };
 ```
 This isolates the database interface so it can easily swap to real REST fetch calls (`axios` or `fetch`) in the future without editing UI code.
+
+### 4.5 User Authentication & Role-Based Access Control (RBAC)
+To ensure data security, multi-user tracking, and role separation, the portal integrates client-side authentication:
+- **Authentication Views**:
+  - `/login`: Form for existing users to sign in. Includes instant **One-Click Demo Access** buttons for examiners to test with pre-seeded Student and Faculty accounts without manual entry.
+  - `/register`: Allows new users to create accounts with email, password validation (minimum 6 characters, confirmation match), and role selection.
+- **Role Hierarchy**:
+  - `student`: Standard candidate access. Can take timed quizzes, accumulate XP (10 XP per correct question), achieve level ranks, and track their personal assessment attempt history.
+  - `admin`: Authorized instructor/evaluator access. In addition to all student features, possesses full access to the Admin Portal (`/admin`) to perform CRUD modifications.
+- **Protected Routing (`ProtectedRoute.jsx`)**:
+  - Verifies authentication status prior to loading assessment or administrative interfaces. Unauthenticated visits to `/quiz/:id` redirect users to `/login`.
+  - Evaluates `requireAdmin={true}` on the `/admin` path. Non-admin users are blocked and presented with an informative "Administrator Access Required" prompt with single-click options to switch accounts or return to the dashboard.
+- **Session Management**:
+  - Active login state is maintained through browser session storage and synced with `QuizContext.jsx`.
+  - Supports clean single-click session logout, wiping credentials from state and redirecting to the login interface.
 
 ---
 
