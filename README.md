@@ -4,6 +4,9 @@ A modern, responsive, and feature-rich Single Page Application (SPA) designed fo
 
 Built for **Advanced Web Technologies (MCA) — Formative Assessment (FA-1 & FA-2)**.
 
+- 🌐 **Live Deployed Application:** [https://js-quiz-portal.vercel.app/](https://js-quiz-portal.vercel.app/)
+- 💻 **GitHub Repository:** [https://github.com/Bhakti-debug/js-quiz-portal](https://github.com/Bhakti-debug/js-quiz-portal)
+
 ---
 
 ## 🌟 Key Features
